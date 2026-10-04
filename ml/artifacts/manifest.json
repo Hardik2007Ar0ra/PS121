@@ -1,0 +1,942 @@
+{
+  "schema": "nwis.model.manifest/1",
+  "models": {
+    "nwis_mud_loss_risk": {
+      "versions": [
+        {
+          "name": "nwis_mud_loss_risk",
+          "version": "1.0.1",
+          "riskType": "MUD_LOSS",
+          "kind": "classifier",
+          "algorithm": "logistic_regression",
+          "featureVersion": "v1.0.0",
+          "trainingRows": 8417,
+          "trainedAt": "2026-10-04T12:04:18.395Z",
+          "notes": "Held-out ROC AUC 0.9886 over 48 unseen wells; at threshold 0.9109011264718938 it catches 94.3% of logged events with 82.4% of alerts worth acting on.",
+          "headline": "Held-out ROC AUC 0.9886 over 48 unseen wells; at threshold 0.9109011264718938 it catches 94.3% of logged events with 82.4% of alerts worth acting on.",
+          "metrics": {
+            "kind": "classifier",
+            "label": "Mud Loss",
+            "rows": 8417,
+            "scoredRows": 8417,
+            "wells": 48,
+            "positives": 1199,
+            "positiveRate": 0.1424,
+            "folds": 4,
+            "rocAuc": 0.9886,
+            "rocAucConfidence": {
+              "lower": 0.9867,
+              "upper": 0.9903,
+              "resamples": 300
+            },
+            "averagePrecision": 0.9245,
+            "brierScore": 0.0405,
+            "calibration": {
+              "expectedCalibrationError": 0.0475,
+              "reliability": [
+                {
+                  "range": "0.0–0.1",
+                  "count": 6690,
+                  "meanPredicted": 0.0113,
+                  "observedFrequency": 0.0009
+                },
+                {
+                  "range": "0.1–0.2",
+                  "count": 67,
+                  "meanPredicted": 0.1413,
+                  "observedFrequency": 0
+                },
+                {
+                  "range": "0.2–0.3",
+                  "count": 23,
+                  "meanPredicted": 0.2457,
+                  "observedFrequency": 0
+                },
+                {
+                  "range": "0.3–0.4",
+                  "count": 15,
+                  "meanPredicted": 0.3466,
+                  "observedFrequency": 0
+                },
+                {
+                  "range": "0.4–0.5",
+                  "count": 17,
+                  "meanPredicted": 0.4431,
+                  "observedFrequency": 0
+                },
+                {
+                  "range": "0.5–0.6",
+                  "count": 18,
+                  "meanPredicted": 0.5445,
+                  "observedFrequency": 0
+                },
+                {
+                  "range": "0.6–0.7",
+                  "count": 30,
+                  "meanPredicted": 0.6514,
+                  "observedFrequency": 0.1
+                },
+                {
+                  "range": "0.7–0.8",
+                  "count": 50,
+                  "meanPredicted": 0.7533,
+                  "observedFrequency": 0.32
+                },
+                {
+                  "range": "0.8–0.9",
+                  "count": 109,
+                  "meanPredicted": 0.861,
+                  "observedFrequency": 0.3119
+                },
+                {
+                  "range": "0.9–1.0",
+                  "count": 1398,
+                  "meanPredicted": 0.9547,
+                  "observedFrequency": 0.8155
+                }
+              ]
+            },
+            "recall": {
+              "recallAt10": 0.0083,
+              "recallAt25": 0.0209,
+              "recallAt50": 0.0417
+            },
+            "operatingPoint": {
+              "threshold": 0.9109011264718938,
+              "tp": 1130,
+              "fp": 242,
+              "tn": 6976,
+              "fn": 69,
+              "precision": 0.8236,
+              "recall": 0.9425,
+              "f1": 0.879,
+              "alertPrecision": 0.8236
+            },
+            "baseline": {
+              "description": "flag every depth interval as positive",
+              "precision": 0.1424,
+              "recall": 1,
+              "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+            },
+            "perFold": [
+              {
+                "fold": 0,
+                "trainRows": 6341,
+                "testRows": 2076,
+                "trainPositives": 1066,
+                "testPositives": 133,
+                "testBaseRate": 0.0641,
+                "rocAuc": 0.994,
+                "averagePrecision": 0.8974,
+                "recall": {
+                  "recallAt10": 0.0752,
+                  "recallAt25": 0.1729
+                }
+              },
+              {
+                "fold": 1,
+                "trainRows": 6303,
+                "testRows": 2114,
+                "trainPositives": 675,
+                "testPositives": 524,
+                "testBaseRate": 0.2479,
+                "rocAuc": 0.9962,
+                "averagePrecision": 0.9843,
+                "recall": {
+                  "recallAt10": 0.0191,
+                  "recallAt25": 0.0477
+                }
+              },
+              {
+                "fold": 2,
+                "trainRows": 6303,
+                "testRows": 2114,
+                "trainPositives": 952,
+                "testPositives": 247,
+                "testBaseRate": 0.1168,
+                "rocAuc": 0.9858,
+                "averagePrecision": 0.8836,
+                "recall": {
+                  "recallAt10": 0.0405,
+                  "recallAt25": 0.1012
+                }
+              },
+              {
+                "fold": 3,
+                "trainRows": 6304,
+                "testRows": 2113,
+                "trainPositives": 904,
+                "testPositives": 295,
+                "testBaseRate": 0.1396,
+                "rocAuc": 0.9884,
+                "averagePrecision": 0.9214,
+                "recall": {
+                  "recallAt10": 0.0339,
+                  "recallAt25": 0.0847
+                }
+              }
+            ],
+            "foldSpread": {
+              "mean": 0.9911,
+              "stdDev": 0.0042,
+              "min": 0.9858,
+              "max": 0.9962
+            },
+            "deltasVsBaseline": {
+              "precision": 0.6812,
+              "auc": 0.4886
+            },
+            "deploymentGate": {
+              "usable": true,
+              "beatsAlwaysAlert": true,
+              "rankingNotInverted": true,
+              "reasons": []
+            }
+          },
+          "file": "nwis_mud_loss_risk@1.0.1.json"
+        }
+      ],
+      "activeVersion": "1.0.1"
+    },
+    "nwis_kick_risk": {
+      "versions": [
+        {
+          "name": "nwis_kick_risk",
+          "version": "1.0.1",
+          "riskType": "KICK",
+          "kind": "classifier",
+          "algorithm": "logistic_regression",
+          "featureVersion": "v1.0.0",
+          "trainingRows": 8239,
+          "trainedAt": "2026-10-04T12:04:18.395Z",
+          "notes": "Held-out ROC AUC 0.9603 over 48 unseen wells; at threshold 0.9069784641120023 it catches 74.5% of logged events with 79.1% of alerts worth acting on.",
+          "headline": "Held-out ROC AUC 0.9603 over 48 unseen wells; at threshold 0.9069784641120023 it catches 74.5% of logged events with 79.1% of alerts worth acting on.",
+          "metrics": {
+            "kind": "classifier",
+            "label": "Kick / Overpressure",
+            "rows": 8239,
+            "scoredRows": 8239,
+            "wells": 48,
+            "positives": 789,
+            "positiveRate": 0.0958,
+            "folds": 4,
+            "rocAuc": 0.9603,
+            "rocAucConfidence": {
+              "lower": 0.9523,
+              "upper": 0.9664,
+              "resamples": 300
+            },
+            "averagePrecision": 0.8136,
+            "brierScore": 0.0652,
+            "calibration": {
+              "expectedCalibrationError": 0.0702,
+              "reliability": [
+                {
+                  "range": "0.0–0.1",
+                  "count": 6370,
+                  "meanPredicted": 0.011,
+                  "observedFrequency": 0.0119
+                },
+                {
+                  "range": "0.1–0.2",
+                  "count": 210,
+                  "meanPredicted": 0.1445,
+                  "observedFrequency": 0.0571
+                },
+                {
+                  "range": "0.2–0.3",
+                  "count": 131,
+                  "meanPredicted": 0.2453,
+                  "observedFrequency": 0.0229
+                },
+                {
+                  "range": "0.3–0.4",
+                  "count": 96,
+                  "meanPredicted": 0.3512,
+                  "observedFrequency": 0.0104
+                },
+                {
+                  "range": "0.4–0.5",
+                  "count": 84,
+                  "meanPredicted": 0.4519,
+                  "observedFrequency": 0.0119
+                },
+                {
+                  "range": "0.5–0.6",
+                  "count": 92,
+                  "meanPredicted": 0.5505,
+                  "observedFrequency": 0.0652
+                },
+                {
+                  "range": "0.6–0.7",
+                  "count": 140,
+                  "meanPredicted": 0.6522,
+                  "observedFrequency": 0.0857
+                },
+                {
+                  "range": "0.7–0.8",
+                  "count": 152,
+                  "meanPredicted": 0.7518,
+                  "observedFrequency": 0.1579
+                },
+                {
+                  "range": "0.8–0.9",
+                  "count": 197,
+                  "meanPredicted": 0.8525,
+                  "observedFrequency": 0.2944
+                },
+                {
+                  "range": "0.9–1.0",
+                  "count": 767,
+                  "meanPredicted": 0.9486,
+                  "observedFrequency": 0.7771
+                }
+              ]
+            },
+            "recall": {
+              "recallAt10": 0.0127,
+              "recallAt25": 0.0317,
+              "recallAt50": 0.0634
+            },
+            "operatingPoint": {
+              "threshold": 0.9069784641120023,
+              "tp": 588,
+              "fp": 155,
+              "tn": 7295,
+              "fn": 201,
+              "precision": 0.7914,
+              "recall": 0.7452,
+              "f1": 0.7676,
+              "alertPrecision": 0.7914
+            },
+            "baseline": {
+              "description": "flag every depth interval as positive",
+              "precision": 0.0958,
+              "recall": 1,
+              "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+            },
+            "perFold": [
+              {
+                "fold": 0,
+                "trainRows": 6168,
+                "testRows": 2071,
+                "trainPositives": 561,
+                "testPositives": 228,
+                "testBaseRate": 0.1101,
+                "rocAuc": 0.9817,
+                "averagePrecision": 0.9122,
+                "recall": {
+                  "recallAt10": 0.0439,
+                  "recallAt25": 0.1096
+                }
+              },
+              {
+                "fold": 1,
+                "trainRows": 6173,
+                "testRows": 2066,
+                "trainPositives": 638,
+                "testPositives": 151,
+                "testBaseRate": 0.0731,
+                "rocAuc": 0.9803,
+                "averagePrecision": 0.8383,
+                "recall": {
+                  "recallAt10": 0.0662,
+                  "recallAt25": 0.1656
+                }
+              },
+              {
+                "fold": 2,
+                "trainRows": 6190,
+                "testRows": 2049,
+                "trainPositives": 566,
+                "testPositives": 223,
+                "testBaseRate": 0.1088,
+                "rocAuc": 0.991,
+                "averagePrecision": 0.9234,
+                "recall": {
+                  "recallAt10": 0.0448,
+                  "recallAt25": 0.1121
+                }
+              },
+              {
+                "fold": 3,
+                "trainRows": 6186,
+                "testRows": 2053,
+                "trainPositives": 602,
+                "testPositives": 187,
+                "testBaseRate": 0.0911,
+                "rocAuc": 0.9066,
+                "averagePrecision": 0.6287,
+                "recall": {
+                  "recallAt10": 0.0535,
+                  "recallAt25": 0.1337
+                }
+              }
+            ],
+            "foldSpread": {
+              "mean": 0.9649,
+              "stdDev": 0.0339,
+              "min": 0.9066,
+              "max": 0.991
+            },
+            "deltasVsBaseline": {
+              "precision": 0.6956,
+              "auc": 0.4603
+            },
+            "deploymentGate": {
+              "usable": true,
+              "beatsAlwaysAlert": true,
+              "rankingNotInverted": true,
+              "reasons": []
+            }
+          },
+          "file": "nwis_kick_risk@1.0.1.json"
+        }
+      ],
+      "activeVersion": "1.0.1"
+    },
+    "nwis_stuck_pipe_risk": {
+      "versions": [
+        {
+          "name": "nwis_stuck_pipe_risk",
+          "version": "1.0.1",
+          "riskType": "STUCK_PIPE",
+          "kind": "classifier",
+          "algorithm": "logistic_regression",
+          "featureVersion": "v1.0.0",
+          "trainingRows": 12564,
+          "trainedAt": "2026-10-04T12:04:18.395Z",
+          "notes": "Held-out ROC AUC 0.9349 over 48 unseen wells; at threshold 0.6961975063088947 it catches 80.2% of logged events with 86.9% of alerts worth acting on.",
+          "headline": "Held-out ROC AUC 0.9349 over 48 unseen wells; at threshold 0.6961975063088947 it catches 80.2% of logged events with 86.9% of alerts worth acting on.",
+          "metrics": {
+            "kind": "classifier",
+            "label": "Stuck Pipe",
+            "rows": 12564,
+            "scoredRows": 12564,
+            "wells": 48,
+            "positives": 5039,
+            "positiveRate": 0.4011,
+            "folds": 4,
+            "rocAuc": 0.9349,
+            "rocAucConfidence": {
+              "lower": 0.931,
+              "upper": 0.939,
+              "resamples": 300
+            },
+            "averagePrecision": 0.9247,
+            "brierScore": 0.1025,
+            "calibration": {
+              "expectedCalibrationError": 0.0508,
+              "reliability": [
+                {
+                  "range": "0.0–0.1",
+                  "count": 4733,
+                  "meanPredicted": 0.039,
+                  "observedFrequency": 0.0558
+                },
+                {
+                  "range": "0.1–0.2",
+                  "count": 1099,
+                  "meanPredicted": 0.142,
+                  "observedFrequency": 0.1447
+                },
+                {
+                  "range": "0.2–0.3",
+                  "count": 620,
+                  "meanPredicted": 0.2462,
+                  "observedFrequency": 0.1742
+                },
+                {
+                  "range": "0.3–0.4",
+                  "count": 437,
+                  "meanPredicted": 0.3483,
+                  "observedFrequency": 0.2586
+                },
+                {
+                  "range": "0.4–0.5",
+                  "count": 372,
+                  "meanPredicted": 0.4478,
+                  "observedFrequency": 0.2849
+                },
+                {
+                  "range": "0.5–0.6",
+                  "count": 306,
+                  "meanPredicted": 0.5498,
+                  "observedFrequency": 0.3399
+                },
+                {
+                  "range": "0.6–0.7",
+                  "count": 360,
+                  "meanPredicted": 0.6508,
+                  "observedFrequency": 0.4194
+                },
+                {
+                  "range": "0.7–0.8",
+                  "count": 428,
+                  "meanPredicted": 0.7513,
+                  "observedFrequency": 0.4953
+                },
+                {
+                  "range": "0.8–0.9",
+                  "count": 636,
+                  "meanPredicted": 0.8532,
+                  "observedFrequency": 0.6164
+                },
+                {
+                  "range": "0.9–1.0",
+                  "count": 3573,
+                  "meanPredicted": 0.9588,
+                  "observedFrequency": 0.96
+                }
+              ]
+            },
+            "recall": {
+              "recallAt10": 0.002,
+              "recallAt25": 0.005,
+              "recallAt50": 0.0099
+            },
+            "operatingPoint": {
+              "threshold": 0.6961975063088947,
+              "tp": 4042,
+              "fp": 610,
+              "tn": 6915,
+              "fn": 997,
+              "precision": 0.8689,
+              "recall": 0.8021,
+              "f1": 0.8342,
+              "alertPrecision": 0.8689
+            },
+            "baseline": {
+              "description": "flag every depth interval as positive",
+              "precision": 0.4011,
+              "recall": 1,
+              "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+            },
+            "perFold": [
+              {
+                "fold": 0,
+                "trainRows": 9418,
+                "testRows": 3146,
+                "trainPositives": 3670,
+                "testPositives": 1369,
+                "testBaseRate": 0.4352,
+                "rocAuc": 0.9342,
+                "averagePrecision": 0.9282,
+                "recall": {
+                  "recallAt10": 0.0073,
+                  "recallAt25": 0.0175
+                }
+              },
+              {
+                "fold": 1,
+                "trainRows": 9421,
+                "testRows": 3143,
+                "trainPositives": 3782,
+                "testPositives": 1257,
+                "testBaseRate": 0.3999,
+                "rocAuc": 0.9588,
+                "averagePrecision": 0.9499,
+                "recall": {
+                  "recallAt10": 0.008,
+                  "recallAt25": 0.0199
+                }
+              },
+              {
+                "fold": 2,
+                "trainRows": 9425,
+                "testRows": 3139,
+                "trainPositives": 3852,
+                "testPositives": 1187,
+                "testBaseRate": 0.3781,
+                "rocAuc": 0.9428,
+                "averagePrecision": 0.923,
+                "recall": {
+                  "recallAt10": 0.0084,
+                  "recallAt25": 0.0211
+                }
+              },
+              {
+                "fold": 3,
+                "trainRows": 9428,
+                "testRows": 3136,
+                "trainPositives": 3813,
+                "testPositives": 1226,
+                "testBaseRate": 0.3909,
+                "rocAuc": 0.9115,
+                "averagePrecision": 0.8983,
+                "recall": {
+                  "recallAt10": 0.0082,
+                  "recallAt25": 0.0204
+                }
+              }
+            ],
+            "foldSpread": {
+              "mean": 0.9368,
+              "stdDev": 0.0171,
+              "min": 0.9115,
+              "max": 0.9588
+            },
+            "deltasVsBaseline": {
+              "precision": 0.4678,
+              "auc": 0.4349
+            },
+            "deploymentGate": {
+              "usable": true,
+              "beatsAlwaysAlert": true,
+              "rankingNotInverted": true,
+              "reasons": []
+            }
+          },
+          "file": "nwis_stuck_pipe_risk@1.0.1.json"
+        }
+      ],
+      "activeVersion": "1.0.1"
+    },
+    "nwis_torque_spike_risk": {
+      "versions": [
+        {
+          "name": "nwis_torque_spike_risk",
+          "version": "1.0.1",
+          "riskType": "TORQUE_SPIKE",
+          "kind": "classifier",
+          "algorithm": "logistic_regression",
+          "featureVersion": "v1.0.0",
+          "trainingRows": 10457,
+          "trainedAt": "2026-10-04T12:04:18.395Z",
+          "notes": "Held-out ROC AUC 0.9063 over 48 unseen wells; at threshold 0.5116403836544268 it catches 80% of logged events with 61.4% of alerts worth acting on.",
+          "headline": "Held-out ROC AUC 0.9063 over 48 unseen wells; at threshold 0.5116403836544268 it catches 80% of logged events with 61.4% of alerts worth acting on.",
+          "metrics": {
+            "kind": "classifier",
+            "label": "Torque & Drag Spike",
+            "rows": 10457,
+            "scoredRows": 10457,
+            "wells": 48,
+            "positives": 2600,
+            "positiveRate": 0.2486,
+            "folds": 4,
+            "rocAuc": 0.9063,
+            "rocAucConfidence": {
+              "lower": 0.9003,
+              "upper": 0.9133,
+              "resamples": 300
+            },
+            "averagePrecision": 0.7694,
+            "brierScore": 0.126,
+            "calibration": {
+              "expectedCalibrationError": 0.0989,
+              "reliability": [
+                {
+                  "range": "0.0–0.1",
+                  "count": 5231,
+                  "meanPredicted": 0.039,
+                  "observedFrequency": 0.0164
+                },
+                {
+                  "range": "0.1–0.2",
+                  "count": 647,
+                  "meanPredicted": 0.1438,
+                  "observedFrequency": 0.1839
+                },
+                {
+                  "range": "0.2–0.3",
+                  "count": 458,
+                  "meanPredicted": 0.2469,
+                  "observedFrequency": 0.2817
+                },
+                {
+                  "range": "0.3–0.4",
+                  "count": 358,
+                  "meanPredicted": 0.3504,
+                  "observedFrequency": 0.2458
+                },
+                {
+                  "range": "0.4–0.5",
+                  "count": 340,
+                  "meanPredicted": 0.4526,
+                  "observedFrequency": 0.2647
+                },
+                {
+                  "range": "0.5–0.6",
+                  "count": 283,
+                  "meanPredicted": 0.5502,
+                  "observedFrequency": 0.364
+                },
+                {
+                  "range": "0.6–0.7",
+                  "count": 369,
+                  "meanPredicted": 0.6497,
+                  "observedFrequency": 0.3686
+                },
+                {
+                  "range": "0.7–0.8",
+                  "count": 484,
+                  "meanPredicted": 0.7516,
+                  "observedFrequency": 0.4566
+                },
+                {
+                  "range": "0.8–0.9",
+                  "count": 680,
+                  "meanPredicted": 0.8579,
+                  "observedFrequency": 0.5176
+                },
+                {
+                  "range": "0.9–1.0",
+                  "count": 1607,
+                  "meanPredicted": 0.9449,
+                  "observedFrequency": 0.794
+                }
+              ]
+            },
+            "recall": {
+              "recallAt10": 0.0038,
+              "recallAt25": 0.0096,
+              "recallAt50": 0.0192
+            },
+            "operatingPoint": {
+              "threshold": 0.5116403836544268,
+              "tp": 2080,
+              "fp": 1309,
+              "tn": 6548,
+              "fn": 520,
+              "precision": 0.6138,
+              "recall": 0.8,
+              "f1": 0.6946,
+              "alertPrecision": 0.6138
+            },
+            "baseline": {
+              "description": "flag every depth interval as positive",
+              "precision": 0.2486,
+              "recall": 1,
+              "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+            },
+            "perFold": [
+              {
+                "fold": 0,
+                "trainRows": 7821,
+                "testRows": 2636,
+                "trainPositives": 1844,
+                "testPositives": 756,
+                "testBaseRate": 0.2868,
+                "rocAuc": 0.8681,
+                "averagePrecision": 0.7507,
+                "recall": {
+                  "recallAt10": 0.0132,
+                  "recallAt25": 0.0331
+                }
+              },
+              {
+                "fold": 1,
+                "trainRows": 7850,
+                "testRows": 2607,
+                "trainPositives": 1893,
+                "testPositives": 707,
+                "testBaseRate": 0.2712,
+                "rocAuc": 0.9095,
+                "averagePrecision": 0.7983,
+                "recall": {
+                  "recallAt10": 0.0141,
+                  "recallAt25": 0.0354
+                }
+              },
+              {
+                "fold": 2,
+                "trainRows": 7854,
+                "testRows": 2603,
+                "trainPositives": 2064,
+                "testPositives": 536,
+                "testBaseRate": 0.2059,
+                "rocAuc": 0.9126,
+                "averagePrecision": 0.7288,
+                "recall": {
+                  "recallAt10": 0.0187,
+                  "recallAt25": 0.0466
+                }
+              },
+              {
+                "fold": 3,
+                "trainRows": 7846,
+                "testRows": 2611,
+                "trainPositives": 1999,
+                "testPositives": 601,
+                "testBaseRate": 0.2302,
+                "rocAuc": 0.9489,
+                "averagePrecision": 0.8457,
+                "recall": {
+                  "recallAt10": 0.0166,
+                  "recallAt25": 0.0416
+                }
+              }
+            ],
+            "foldSpread": {
+              "mean": 0.9098,
+              "stdDev": 0.0286,
+              "min": 0.8681,
+              "max": 0.9489
+            },
+            "deltasVsBaseline": {
+              "precision": 0.3652,
+              "auc": 0.4063
+            },
+            "deploymentGate": {
+              "usable": true,
+              "beatsAlwaysAlert": true,
+              "rankingNotInverted": true,
+              "reasons": []
+            }
+          },
+          "file": "nwis_torque_spike_risk@1.0.1.json"
+        }
+      ],
+      "activeVersion": "1.0.1"
+    },
+    "nwis_npt_estimate": {
+      "versions": [
+        {
+          "name": "nwis_npt_estimate",
+          "version": "1.0.1",
+          "riskType": "NPT",
+          "kind": "regressor",
+          "algorithm": "gradient_boosted_trees",
+          "featureVersion": "v1.0.0",
+          "trainingRows": 64879,
+          "trainedAt": "2026-10-04T12:04:18.395Z",
+          "notes": "Beats the mean-predictor baseline (RMSE 12.1763h vs 12.6114h).",
+          "headline": "Beats the mean-predictor baseline (RMSE 12.1763h vs 12.6114h).",
+          "metrics": {
+            "kind": "regressor",
+            "label": "Non-Productive Time",
+            "rows": 64879,
+            "wells": 48,
+            "folds": 4,
+            "rmse": 12.1763,
+            "mae": 7.4873,
+            "r2": 0.0678,
+            "baselineRmse": 12.6114,
+            "meanTarget": 4.8215,
+            "predictedMean": 4.7982,
+            "predictedStdDev": 2.3784,
+            "targetStdDev": 12.6114,
+            "beatsBaseline": true,
+            "percentiles": [
+              {
+                "percentile": 50,
+                "rows": 32440,
+                "meanActualHours": 0,
+                "meanPredictedHours": 4.24,
+                "underPrediction": 4.24
+              },
+              {
+                "percentile": 75,
+                "rows": 48660,
+                "meanActualHours": 0,
+                "meanPredictedHours": 4.43,
+                "underPrediction": 4.43
+              },
+              {
+                "percentile": 90,
+                "rows": 58392,
+                "meanActualHours": 0.85,
+                "meanPredictedHours": 4.59,
+                "underPrediction": 3.73
+              },
+              {
+                "percentile": 95,
+                "rows": 61636,
+                "meanActualHours": 2.59,
+                "meanPredictedHours": 4.71,
+                "underPrediction": 2.12
+              },
+              {
+                "percentile": 99,
+                "rows": 64231,
+                "meanActualHours": 4.34,
+                "meanPredictedHours": 4.78,
+                "underPrediction": 0.45
+              }
+            ],
+            "perFold": [
+              {
+                "fold": 0,
+                "trainRows": 48579,
+                "testRows": 16300,
+                "rmse": 11.9563,
+                "mae": 7.2658,
+                "r2": 0.0812,
+                "baselineRmse": 12.4737
+              },
+              {
+                "fold": 1,
+                "trainRows": 48598,
+                "testRows": 16281,
+                "rmse": 12.0068,
+                "mae": 7.3489,
+                "r2": 0.0465,
+                "baselineRmse": 12.296
+              },
+              {
+                "fold": 2,
+                "trainRows": 48804,
+                "testRows": 16075,
+                "rmse": 12.741,
+                "mae": 7.8314,
+                "r2": 0.074,
+                "baselineRmse": 13.2405
+              },
+              {
+                "fold": 3,
+                "trainRows": 48656,
+                "testRows": 16223,
+                "rmse": 11.9904,
+                "mae": 7.5079,
+                "r2": 0.0663,
+                "baselineRmse": 12.4091
+              }
+            ]
+          },
+          "file": "nwis_npt_estimate@1.0.1.json"
+        }
+      ],
+      "activeVersion": "1.0.1"
+    },
+    "nwis_formation_risk_anomaly": {
+      "versions": [
+        {
+          "name": "nwis_formation_risk_anomaly",
+          "version": "1.0.1",
+          "riskType": "FORMATION_RISK",
+          "kind": "anomaly",
+          "algorithm": "isolation_forest",
+          "featureVersion": "v1.0.0",
+          "trainingRows": 64879,
+          "trainedAt": "2026-10-04T12:04:18.395Z",
+          "notes": "The top 1% of scored intervals contain 271 of 11199 logged events.",
+          "headline": "The top 1% of scored intervals contain 271 of 11199 logged events.",
+          "metrics": {
+            "kind": "anomaly",
+            "label": "Formation Risk Anomaly",
+            "rows": 64879,
+            "wells": 48,
+            "folds": 4,
+            "scoreRange": {
+              "min": 0.3948,
+              "max": 0.6325,
+              "mean": 0.4718
+            },
+            "flagRateAtDefault": 0.0008,
+            "enrichment": {
+              "topOnePercentIntervals": 629,
+              "intervalsContainingAnEvent": 271,
+              "recallOfLoggedEvents": 0.0242,
+              "totalLoggedEvents": 11199,
+              "marginM": 60
+            },
+            "note": "trained without labels; the enrichment block reports how much of the real event set falls in the flagged intervals"
+          },
+          "file": "nwis_formation_risk_anomaly@1.0.1.json"
+        }
+      ],
+      "activeVersion": "1.0.1"
+    }
+  },
+  "updatedAt": "2026-10-04T12:08:33.847Z"
+}

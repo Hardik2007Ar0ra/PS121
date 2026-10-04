@@ -52,9 +52,90 @@ Vite prints a local URL in the terminal, usually `http://localhost:5173`. Open t
 
 ```bash
 npm run dev      # Start the Vite development server
+npm run api      # Start the Node/Express backend API on port 4000
 npm run build    # Create a production build in dist/
 npm run preview  # Serve the production build locally
 ```
+
+## Backend and synthetic intelligence layer
+
+This prototype now includes a lightweight backend under `server/` to represent the complete NWIS solution architecture without requiring an external database service.
+
+| File | Scope |
+| --- | --- |
+| `server/db.js` | Embedded SQLite schema, synthetic seed data, and SQL query helpers |
+| `server/auth.js` | Password hashing, JWT login, protected-route middleware, and role checks |
+| `server/ml.js` | Simple supervised and unsupervised ML-style engines |
+| `server/index.js` | Express API routes for auth, wells, events, documents, telemetry, alerts, recommendations, and ML outputs |
+
+The backend uses SQLite through `better-sqlite3`. By default the database is created in memory and seeded on startup. To persist it to a local file, set `NWIS_DB_PATH` before starting the API:
+
+```bash
+NWIS_DB_PATH=./nwis.sqlite npm run api
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:NWIS_DB_PATH="./nwis.sqlite"; npm run api
+```
+
+Demo users are seeded automatically:
+
+```text
+engineer@nwis.demo / demo1234
+admin@nwis.demo / admin1234
+```
+
+Start the backend and frontend in two terminals:
+
+```bash
+npm run api
+npm run dev
+```
+
+Vite proxies `/api` requests to `http://localhost:4000`, so future frontend API calls can use relative URLs such as `/api/wells`.
+
+## Backend API overview
+
+```text
+GET  /api/health
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/me
+GET  /api/wells
+GET  /api/wells/:id
+GET  /api/events
+GET  /api/documents
+GET  /api/telemetry
+GET  /api/risks
+GET  /api/search?q=stuck
+GET  /api/ml/architecture
+GET  /api/ml/similarity?activeWellId=A-17&radiusKm=5
+GET  /api/ml/clusters
+GET  /api/ml/risk?depth=2900&formation=Formation%20X
+GET  /api/alerts/current?depth=2900&formation=Formation%20X
+POST /api/alerts/evaluate
+GET  /api/recommendations?depth=2900&riskType=Stuck%20Pipe
+POST /api/admin/events
+```
+
+`POST /api/admin/events` requires an admin bearer token. Log in with the seeded admin account first and pass the returned token as:
+
+```text
+Authorization: Bearer <token>
+```
+
+## Prototype ML engines
+
+The backend intentionally uses simpler inspectable models rather than deep neural networks:
+
+- **Supervised risk classifier** — a logistic-regression-style scoring engine for Stuck Pipe, Lost Circulation, Kick, and Formation Instability. It uses synthetic training rows with depth, formation, torque, ROP, standpipe pressure, mud weight, offset-event density, trajectory complexity, and similarity score.
+- **Unsupervised analogue-well clustering** — a small K-means implementation that clusters wells by distance, formation match, trajectory complexity, depth ratios, similarity, and indexed event density.
+- **Similarity ranking** — ranks offset wells relative to the active well and returns explanation factors.
+- **Recommendation engine** — maps model outputs and historical evidence to decision-support recommendations. These are informational only and require engineer review.
+
+In a production OIL deployment, these synthetic rows and deterministic coefficients would be replaced by validated historical data, real OCR/NLP extraction outputs, eRTMAC streams, and trained models.
 
 ## Project layout
 
@@ -75,6 +156,11 @@ npm run preview  # Serve the production build locally
         ├── telemetry.js    # Deterministic synthetic chart data
         ├── risks.js         # Prototype risk categories and evidence summaries
         └── documents.js    # Synthetic repository metadata and extracted text
+└── server/
+    ├── index.js             # Express backend API
+    ├── db.js                # SQLite schema and seed data
+    ├── auth.js              # JWT authentication and roles
+    └── ml.js                # Simple risk, similarity, and clustering engines
 ```
 
 ## Data and behavior

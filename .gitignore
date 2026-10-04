@@ -1,0 +1,44 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.vite/
+
+# local database files (runtime store; schema is created by migrations)
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+nwis.sqlite*
+
+# environment / secrets
+.env
+.env.local
+.env.*.local
+
+# uploaded + derived document artefacts (source PDFs, page images, OCR cache)
+storage/
+!storage/.gitkeep
+
+# ML artefacts are COMMITTED on purpose (models must be versioned & reviewable).
+# Large transient training caches are not.
+ml/artifacts/cache/
+ml/.cache/
+
+# logs
+*.log
+npm-debug.log*
+logs/
+
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# test output
+coverage/
+playwright-report/
+test-results/

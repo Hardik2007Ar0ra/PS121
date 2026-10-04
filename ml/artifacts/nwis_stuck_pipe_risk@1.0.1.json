@@ -1,0 +1,682 @@
+{
+  "schema": "nwis.model.bundle/1",
+  "name": "nwis_stuck_pipe_risk",
+  "version": "1.0.1",
+  "riskType": "STUCK_PIPE",
+  "kind": "classifier",
+  "algorithm": "logistic_regression",
+  "featureVersion": "v1.0.0",
+  "featureList": [
+    "depth_m",
+    "depth_fraction_of_td",
+    "inclination_deg",
+    "dogleg_deg_per_30m",
+    "azimuth_sin",
+    "azimuth_cos",
+    "hole_size_in",
+    "section_no",
+    "metres_into_formation",
+    "metres_to_formation_top",
+    "mud_weight_ppg",
+    "ecd_ppg",
+    "pore_pressure_gradient_ppg",
+    "fracture_gradient_ppg",
+    "overbalance_ppg",
+    "fracture_margin_ppg",
+    "is_underbalanced",
+    "is_overbalanced_ecd",
+    "mud_system_oil_based",
+    "lcm_present",
+    "lcm_ppb",
+    "d_exponent",
+    "normalised_d_exponent",
+    "d_exponent_trend",
+    "lithology_index",
+    "formation_pore_risk",
+    "torque_knm",
+    "drag_knm",
+    "torque_ratio_local",
+    "drag_ratio_local",
+    "rop_mhr",
+    "rop_ratio_local",
+    "wob_ton",
+    "hook_load_ton",
+    "spp_psi",
+    "torque_drag_ratio",
+    "hook_load_ratio_local",
+    "flow_out_lpm",
+    "flow_deficit_lpm",
+    "pit_volume_m3",
+    "pit_trend_m3_per_m",
+    "gas_ratio_ppm",
+    "gas_ratio_ratio_local",
+    "prior_event_rate",
+    "prior_loss_rate",
+    "prior_kick_rate",
+    "prior_stuck_rate",
+    "prior_severity_p90",
+    "prior_offset_wells_with_events"
+  ],
+  "trainingRows": 12564,
+  "trainedAt": "2026-10-04T12:04:18.395Z",
+  "notes": "Held-out ROC AUC 0.9349 over 48 unseen wells; at threshold 0.6961975063088947 it catches 80.2% of logged events with 86.9% of alerts worth acting on.",
+  "metrics": {
+    "kind": "classifier",
+    "label": "Stuck Pipe",
+    "rows": 12564,
+    "scoredRows": 12564,
+    "wells": 48,
+    "positives": 5039,
+    "positiveRate": 0.4011,
+    "folds": 4,
+    "rocAuc": 0.9349,
+    "rocAucConfidence": {
+      "lower": 0.931,
+      "upper": 0.939,
+      "resamples": 300
+    },
+    "averagePrecision": 0.9247,
+    "brierScore": 0.1025,
+    "calibration": {
+      "expectedCalibrationError": 0.0508,
+      "reliability": [
+        {
+          "range": "0.0–0.1",
+          "count": 4733,
+          "meanPredicted": 0.039,
+          "observedFrequency": 0.0558
+        },
+        {
+          "range": "0.1–0.2",
+          "count": 1099,
+          "meanPredicted": 0.142,
+          "observedFrequency": 0.1447
+        },
+        {
+          "range": "0.2–0.3",
+          "count": 620,
+          "meanPredicted": 0.2462,
+          "observedFrequency": 0.1742
+        },
+        {
+          "range": "0.3–0.4",
+          "count": 437,
+          "meanPredicted": 0.3483,
+          "observedFrequency": 0.2586
+        },
+        {
+          "range": "0.4–0.5",
+          "count": 372,
+          "meanPredicted": 0.4478,
+          "observedFrequency": 0.2849
+        },
+        {
+          "range": "0.5–0.6",
+          "count": 306,
+          "meanPredicted": 0.5498,
+          "observedFrequency": 0.3399
+        },
+        {
+          "range": "0.6–0.7",
+          "count": 360,
+          "meanPredicted": 0.6508,
+          "observedFrequency": 0.4194
+        },
+        {
+          "range": "0.7–0.8",
+          "count": 428,
+          "meanPredicted": 0.7513,
+          "observedFrequency": 0.4953
+        },
+        {
+          "range": "0.8–0.9",
+          "count": 636,
+          "meanPredicted": 0.8532,
+          "observedFrequency": 0.6164
+        },
+        {
+          "range": "0.9–1.0",
+          "count": 3573,
+          "meanPredicted": 0.9588,
+          "observedFrequency": 0.96
+        }
+      ]
+    },
+    "recall": {
+      "recallAt10": 0.002,
+      "recallAt25": 0.005,
+      "recallAt50": 0.0099
+    },
+    "operatingPoint": {
+      "threshold": 0.6961975063088947,
+      "tp": 4042,
+      "fp": 610,
+      "tn": 6915,
+      "fn": 997,
+      "precision": 0.8689,
+      "recall": 0.8021,
+      "f1": 0.8342,
+      "alertPrecision": 0.8689
+    },
+    "baseline": {
+      "description": "flag every depth interval as positive",
+      "precision": 0.4011,
+      "recall": 1,
+      "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+    },
+    "perFold": [
+      {
+        "fold": 0,
+        "trainRows": 9418,
+        "testRows": 3146,
+        "trainPositives": 3670,
+        "testPositives": 1369,
+        "testBaseRate": 0.4352,
+        "rocAuc": 0.9342,
+        "averagePrecision": 0.9282,
+        "recall": {
+          "recallAt10": 0.0073,
+          "recallAt25": 0.0175
+        }
+      },
+      {
+        "fold": 1,
+        "trainRows": 9421,
+        "testRows": 3143,
+        "trainPositives": 3782,
+        "testPositives": 1257,
+        "testBaseRate": 0.3999,
+        "rocAuc": 0.9588,
+        "averagePrecision": 0.9499,
+        "recall": {
+          "recallAt10": 0.008,
+          "recallAt25": 0.0199
+        }
+      },
+      {
+        "fold": 2,
+        "trainRows": 9425,
+        "testRows": 3139,
+        "trainPositives": 3852,
+        "testPositives": 1187,
+        "testBaseRate": 0.3781,
+        "rocAuc": 0.9428,
+        "averagePrecision": 0.923,
+        "recall": {
+          "recallAt10": 0.0084,
+          "recallAt25": 0.0211
+        }
+      },
+      {
+        "fold": 3,
+        "trainRows": 9428,
+        "testRows": 3136,
+        "trainPositives": 3813,
+        "testPositives": 1226,
+        "testBaseRate": 0.3909,
+        "rocAuc": 0.9115,
+        "averagePrecision": 0.8983,
+        "recall": {
+          "recallAt10": 0.0082,
+          "recallAt25": 0.0204
+        }
+      }
+    ],
+    "foldSpread": {
+      "mean": 0.9368,
+      "stdDev": 0.0171,
+      "min": 0.9115,
+      "max": 0.9588
+    },
+    "deltasVsBaseline": {
+      "precision": 0.4678,
+      "auc": 0.4349
+    },
+    "deploymentGate": {
+      "usable": true,
+      "beatsAlwaysAlert": true,
+      "rankingNotInverted": true,
+      "reasons": []
+    }
+  },
+  "modelCard": {
+    "name": "nwis_stuck_pipe",
+    "riskType": "STUCK_PIPE",
+    "purpose": "Flag differential or mechanical sticking risk from torque, hook load and ROP decay.",
+    "trainedAt": "2026-10-04T12:04:18.395Z",
+    "featureVersion": "v1.0.0",
+    "featureList": [
+      "depth_m",
+      "depth_fraction_of_td",
+      "inclination_deg",
+      "dogleg_deg_per_30m",
+      "azimuth_sin",
+      "azimuth_cos",
+      "hole_size_in",
+      "section_no",
+      "metres_into_formation",
+      "metres_to_formation_top",
+      "mud_weight_ppg",
+      "ecd_ppg",
+      "pore_pressure_gradient_ppg",
+      "fracture_gradient_ppg",
+      "overbalance_ppg",
+      "fracture_margin_ppg",
+      "is_underbalanced",
+      "is_overbalanced_ecd",
+      "mud_system_oil_based",
+      "lcm_present",
+      "lcm_ppb",
+      "d_exponent",
+      "normalised_d_exponent",
+      "d_exponent_trend",
+      "lithology_index",
+      "formation_pore_risk",
+      "torque_knm",
+      "drag_knm",
+      "torque_ratio_local",
+      "drag_ratio_local",
+      "rop_mhr",
+      "rop_ratio_local",
+      "wob_ton",
+      "hook_load_ton",
+      "spp_psi",
+      "torque_drag_ratio",
+      "hook_load_ratio_local",
+      "flow_out_lpm",
+      "flow_deficit_lpm",
+      "pit_volume_m3",
+      "pit_trend_m3_per_m",
+      "gas_ratio_ppm",
+      "gas_ratio_ratio_local",
+      "prior_event_rate",
+      "prior_loss_rate",
+      "prior_kick_rate",
+      "prior_stuck_rate",
+      "prior_severity_p90",
+      "prior_offset_wells_with_events"
+    ],
+    "featureCount": 49,
+    "trainingRows": 12564,
+    "trainingWells": 48,
+    "positives": 5039,
+    "positiveRate": 40.11,
+    "validation": {
+      "method": "4-fold cross-validation grouped by well",
+      "rationale": "Rows are split by well, never at random. Adjacent metres of one hole share their own neighbourhood in the rolling features and the same rock, so a random row split leaks the well into the training set and reports a number that does not survive the next well.",
+      "folds": 4
+    },
+    "expectedFeatures": [
+      "rop_ratio_local",
+      "torque_ratio_local",
+      "hook_load_ratio_local",
+      "is_underbalanced",
+      "lithology_index"
+    ],
+    "limitations": [
+      "Labels are widened by ±70 m around each recorded event so the model sees precursors. The positive rate in training (40.11%) is therefore higher than the operational event rate, and the operating threshold is not a frequency estimate.",
+      "Training data is synthetic. The generator derives event labels from the same physical channels the feature extractor measures, so a high score here demonstrates that the pipeline is internally consistent — it is not evidence of field performance. Real well data must be used before any operational decision rests on these numbers.",
+      "One model covers the whole field. Formation-specific behaviour is expressed through the leave-one-well-out formation priors in the feature set, not through separate models."
+    ],
+    "kind": "classifier",
+    "algorithm": "logistic_regression",
+    "headline": "Held-out ROC AUC 0.9349 over 48 unseen wells; at threshold 0.6961975063088947 it catches 80.2% of logged events with 86.9% of alerts worth acting on.",
+    "selection": {
+      "criterion": "highest mean held-out ROC AUC across grouped folds, average precision as tie-break",
+      "candidates": [
+        {
+          "algorithm": "logistic_regression",
+          "rocAuc": 0.9349,
+          "rocAucConfidence": {
+            "lower": 0.931,
+            "upper": 0.939,
+            "resamples": 300
+          },
+          "averagePrecision": 0.9247,
+          "calibrationError": 0.0508,
+          "selected": true
+        },
+        {
+          "algorithm": "gradient_boosted_trees",
+          "rocAuc": 0.6795,
+          "rocAucConfidence": {
+            "lower": 0.6711,
+            "upper": 0.6896,
+            "resamples": 300
+          },
+          "averagePrecision": 0.6099,
+          "calibrationError": 0.0901,
+          "selected": false
+        }
+      ],
+      "rationale": "logistic_regression was selected because it scored higher on held-out wells than gradient_boosted_trees (0.9349 vs 0.6795). The features are engineered local ratios and physics margins, which are close to linear, so a boosted model had little interaction structure to exploit here. On a feature set with genuine non-linearity the ordering could reverse; the comparison is re-run on every training run for that reason."
+    },
+    "operatingPoint": {
+      "threshold": 0.6961975063088947,
+      "thresholdSource": "chosen on pooled out-of-fold predictions with a precision floor",
+      "minPrecision": 0.3,
+      "precision": 0.8689,
+      "recall": 0.8021,
+      "f1": 0.8342,
+      "truePositives": 4042,
+      "falsePositives": 610,
+      "falseNegatives": 997,
+      "trueNegatives": 6915,
+      "note": null
+    },
+    "calibration": {
+      "method": "Platt scaling fitted on the training set",
+      "slope": 2.7472,
+      "intercept": -0.4289,
+      "expectedCalibrationError": 0.0508,
+      "reliability": [
+        {
+          "range": "0.0–0.1",
+          "count": 4733,
+          "meanPredicted": 0.039,
+          "observedFrequency": 0.0558
+        },
+        {
+          "range": "0.1–0.2",
+          "count": 1099,
+          "meanPredicted": 0.142,
+          "observedFrequency": 0.1447
+        },
+        {
+          "range": "0.2–0.3",
+          "count": 620,
+          "meanPredicted": 0.2462,
+          "observedFrequency": 0.1742
+        },
+        {
+          "range": "0.3–0.4",
+          "count": 437,
+          "meanPredicted": 0.3483,
+          "observedFrequency": 0.2586
+        },
+        {
+          "range": "0.4–0.5",
+          "count": 372,
+          "meanPredicted": 0.4478,
+          "observedFrequency": 0.2849
+        },
+        {
+          "range": "0.5–0.6",
+          "count": 306,
+          "meanPredicted": 0.5498,
+          "observedFrequency": 0.3399
+        },
+        {
+          "range": "0.6–0.7",
+          "count": 360,
+          "meanPredicted": 0.6508,
+          "observedFrequency": 0.4194
+        },
+        {
+          "range": "0.7–0.8",
+          "count": 428,
+          "meanPredicted": 0.7513,
+          "observedFrequency": 0.4953
+        },
+        {
+          "range": "0.8–0.9",
+          "count": 636,
+          "meanPredicted": 0.8532,
+          "observedFrequency": 0.6164
+        },
+        {
+          "range": "0.9–1.0",
+          "count": 3573,
+          "meanPredicted": 0.9588,
+          "observedFrequency": 0.96
+        }
+      ]
+    },
+    "baselines": {
+      "description": "flag every depth interval as positive",
+      "precision": 0.4011,
+      "recall": 1,
+      "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+    },
+    "topCoefficients": [
+      {
+        "feature": "torque_drag_ratio",
+        "weight": 2.6305
+      },
+      {
+        "feature": "rop_mhr",
+        "weight": -2.1905
+      },
+      {
+        "feature": "hook_load_ton",
+        "weight": 2.1255
+      },
+      {
+        "feature": "inclination_deg",
+        "weight": 1.779
+      },
+      {
+        "feature": "depth_fraction_of_td",
+        "weight": 1.7749
+      },
+      {
+        "feature": "flow_out_lpm",
+        "weight": 1.3208
+      },
+      {
+        "feature": "drag_ratio_local",
+        "weight": 1.2519
+      },
+      {
+        "feature": "depth_m",
+        "weight": -1.1781
+      },
+      {
+        "feature": "torque_ratio_local",
+        "weight": -1.1506
+      },
+      {
+        "feature": "prior_offset_wells_with_events",
+        "weight": 1.0608
+      },
+      {
+        "feature": "hook_load_ratio_local",
+        "weight": 0.932
+      },
+      {
+        "feature": "prior_kick_rate",
+        "weight": 0.7939
+      },
+      {
+        "feature": "torque_knm",
+        "weight": 0.7906
+      },
+      {
+        "feature": "rop_ratio_local",
+        "weight": 0.7576
+      },
+      {
+        "feature": "wob_ton",
+        "weight": -0.727
+      }
+    ],
+    "interpretableRules": null,
+    "foldSpread": {
+      "mean": 0.9368,
+      "stdDev": 0.0171,
+      "min": 0.9115,
+      "max": 0.9588
+    }
+  },
+  "artifact": {
+    "kind": "logistic",
+    "weights": [
+      -1.1781436135124195,
+      1.774853148391783,
+      1.778986079045322,
+      -0.1978236711831722,
+      6.667776958821237e-11,
+      1.2798259777347938e-11,
+      0.26134297296587605,
+      -0.2839387808191076,
+      0.16227474648485055,
+      -0.16357816366425937,
+      0.1429878983967161,
+      -0.1785334839652886,
+      0.10614089018375922,
+      0.17488201237225537,
+      0.18094476418137526,
+      0.45283493679604486,
+      0.01253217859531143,
+      -0.20352751490487395,
+      -0.0685467938591767,
+      -0.26829358698561995,
+      0.22281223251917723,
+      0.47764082174923184,
+      -0.4469414053247668,
+      0.027928281356187874,
+      0.03873914618164366,
+      0.5539013680699217,
+      0.7906418766682954,
+      -0.4409314929937054,
+      -1.150596418224745,
+      1.251928006777217,
+      -2.190470435131195,
+      0.7575809788304804,
+      -0.727042271414489,
+      2.125548468988253,
+      -0.583707085462627,
+      2.6305482833923337,
+      0.9320200154593645,
+      1.3208039917859353,
+      0.1483668013194268,
+      -0.0824776791940596,
+      -0.11278539359403844,
+      -0.05310165630928043,
+      0.05237081779447955,
+      -0.3408057039101316,
+      -0.1162580259532769,
+      0.7939359775384875,
+      -0.2753393290822829,
+      0.4642514353894571,
+      1.0608288316738173
+    ],
+    "bias": -0.4009576100879682,
+    "means": [
+      4145.327523081821,
+      0.5865227395733822,
+      13.58132441897493,
+      0.24831502706144953,
+      0,
+      1,
+      6.534403852276345,
+      5.173750397962432,
+      218.42760267430654,
+      -218.42760267430654,
+      14.975092088506747,
+      17.92957585163961,
+      13.885019579753552,
+      17.757478748805585,
+      1.0900725087551775,
+      -0.17209710283349422,
+      0.1055396370582617,
+      0.6380929640241961,
+      0.34511302133078636,
+      0.33739255014326647,
+      3.7879815345431846,
+      1.6781531359439685,
+      1.4027607449856756,
+      0.008478939032155368,
+      0.7385140082776132,
+      0.1463027698185239,
+      44.49952960840486,
+      53.26139764406224,
+      1.0333824816937305,
+      1.022186262336833,
+      6.755983763132199,
+      0.9682575055714737,
+      18.934745304043265,
+      210.48301496338735,
+      5256.6465297675895,
+      0.8820392709328202,
+      1.0126314549506457,
+      813.6950015918497,
+      3.390994110156001,
+      141.97106255969464,
+      -0.0004936954791467671,
+      142.5515759312321,
+      1.0185255332696632,
+      3.138480977395734,
+      0.21610852435530087,
+      0.10172914676854505,
+      1.1456840974212035,
+      3.87774594078319,
+      10.509232728430437
+    ],
+    "deviations": [
+      2253.6658669376056,
+      0.2926916363924865,
+      17.73670919234175,
+      0.38119728242084233,
+      0.000001,
+      0.000001,
+      3.539435545732967,
+      1.2573788223147346,
+      712.1979269036887,
+      712.1979269036887,
+      2.3239441178415765,
+      3.621083475935607,
+      1.9523025827204952,
+      1.7770384839910724,
+      0.7267705887099877,
+      2.0638636784325226,
+      0.30724749318402683,
+      0.48055211297735073,
+      0.47540511549491876,
+      0.472820068578994,
+      5.701254527263008,
+      0.5333154124381728,
+      0.14784560652352277,
+      0.18526696114544855,
+      0.25398595068126306,
+      0.04759672557923607,
+      33.376710198060856,
+      43.91230782677866,
+      0.09371205680399212,
+      0.08340772529018717,
+      7.145193109375014,
+      0.38635279620588997,
+      5.585904487779129,
+      41.69413649923876,
+      3515.0066720997847,
+      0.10568181038598745,
+      0.03422008776956317,
+      168.1816870400197,
+      30.18920854409051,
+      1.1668033660816084,
+      0.04721665065510446,
+      67.5229909899224,
+      0.33163533584299915,
+      2.554664142560616,
+      0.5638973670363289,
+      0.2039399330242692,
+      0.9417729893312027,
+      1.3055918285157777,
+      5.419389360559355
+    ],
+    "l2": 0.001,
+    "trainingLoss": 0.2882371168500006,
+    "classWeight": 1.9413574121849575,
+    "positives": 5039,
+    "n": 12564,
+    "calibrator": {
+      "kind": "platt",
+      "slope": 2.7471937670250703,
+      "bias": -0.42893294776221186,
+      "mean": 0.45838593433081737,
+      "deviation": 0.37972974467969184
+    },
+    "operatingThreshold": 0.6961975063088947,
+    "featureVersion": "v1.0.0"
+  }
+}

@@ -1,0 +1,682 @@
+{
+  "schema": "nwis.model.bundle/1",
+  "name": "nwis_kick_risk",
+  "version": "1.0.1",
+  "riskType": "KICK",
+  "kind": "classifier",
+  "algorithm": "logistic_regression",
+  "featureVersion": "v1.0.0",
+  "featureList": [
+    "depth_m",
+    "depth_fraction_of_td",
+    "inclination_deg",
+    "dogleg_deg_per_30m",
+    "azimuth_sin",
+    "azimuth_cos",
+    "hole_size_in",
+    "section_no",
+    "metres_into_formation",
+    "metres_to_formation_top",
+    "mud_weight_ppg",
+    "ecd_ppg",
+    "pore_pressure_gradient_ppg",
+    "fracture_gradient_ppg",
+    "overbalance_ppg",
+    "fracture_margin_ppg",
+    "is_underbalanced",
+    "is_overbalanced_ecd",
+    "mud_system_oil_based",
+    "lcm_present",
+    "lcm_ppb",
+    "d_exponent",
+    "normalised_d_exponent",
+    "d_exponent_trend",
+    "lithology_index",
+    "formation_pore_risk",
+    "torque_knm",
+    "drag_knm",
+    "torque_ratio_local",
+    "drag_ratio_local",
+    "rop_mhr",
+    "rop_ratio_local",
+    "wob_ton",
+    "hook_load_ton",
+    "spp_psi",
+    "torque_drag_ratio",
+    "hook_load_ratio_local",
+    "flow_out_lpm",
+    "flow_deficit_lpm",
+    "pit_volume_m3",
+    "pit_trend_m3_per_m",
+    "gas_ratio_ppm",
+    "gas_ratio_ratio_local",
+    "prior_event_rate",
+    "prior_loss_rate",
+    "prior_kick_rate",
+    "prior_stuck_rate",
+    "prior_severity_p90",
+    "prior_offset_wells_with_events"
+  ],
+  "trainingRows": 8239,
+  "trainedAt": "2026-10-04T12:04:18.395Z",
+  "notes": "Held-out ROC AUC 0.9603 over 48 unseen wells; at threshold 0.9069784641120023 it catches 74.5% of logged events with 79.1% of alerts worth acting on.",
+  "metrics": {
+    "kind": "classifier",
+    "label": "Kick / Overpressure",
+    "rows": 8239,
+    "scoredRows": 8239,
+    "wells": 48,
+    "positives": 789,
+    "positiveRate": 0.0958,
+    "folds": 4,
+    "rocAuc": 0.9603,
+    "rocAucConfidence": {
+      "lower": 0.9523,
+      "upper": 0.9664,
+      "resamples": 300
+    },
+    "averagePrecision": 0.8136,
+    "brierScore": 0.0652,
+    "calibration": {
+      "expectedCalibrationError": 0.0702,
+      "reliability": [
+        {
+          "range": "0.0–0.1",
+          "count": 6370,
+          "meanPredicted": 0.011,
+          "observedFrequency": 0.0119
+        },
+        {
+          "range": "0.1–0.2",
+          "count": 210,
+          "meanPredicted": 0.1445,
+          "observedFrequency": 0.0571
+        },
+        {
+          "range": "0.2–0.3",
+          "count": 131,
+          "meanPredicted": 0.2453,
+          "observedFrequency": 0.0229
+        },
+        {
+          "range": "0.3–0.4",
+          "count": 96,
+          "meanPredicted": 0.3512,
+          "observedFrequency": 0.0104
+        },
+        {
+          "range": "0.4–0.5",
+          "count": 84,
+          "meanPredicted": 0.4519,
+          "observedFrequency": 0.0119
+        },
+        {
+          "range": "0.5–0.6",
+          "count": 92,
+          "meanPredicted": 0.5505,
+          "observedFrequency": 0.0652
+        },
+        {
+          "range": "0.6–0.7",
+          "count": 140,
+          "meanPredicted": 0.6522,
+          "observedFrequency": 0.0857
+        },
+        {
+          "range": "0.7–0.8",
+          "count": 152,
+          "meanPredicted": 0.7518,
+          "observedFrequency": 0.1579
+        },
+        {
+          "range": "0.8–0.9",
+          "count": 197,
+          "meanPredicted": 0.8525,
+          "observedFrequency": 0.2944
+        },
+        {
+          "range": "0.9–1.0",
+          "count": 767,
+          "meanPredicted": 0.9486,
+          "observedFrequency": 0.7771
+        }
+      ]
+    },
+    "recall": {
+      "recallAt10": 0.0127,
+      "recallAt25": 0.0317,
+      "recallAt50": 0.0634
+    },
+    "operatingPoint": {
+      "threshold": 0.9069784641120023,
+      "tp": 588,
+      "fp": 155,
+      "tn": 7295,
+      "fn": 201,
+      "precision": 0.7914,
+      "recall": 0.7452,
+      "f1": 0.7676,
+      "alertPrecision": 0.7914
+    },
+    "baseline": {
+      "description": "flag every depth interval as positive",
+      "precision": 0.0958,
+      "recall": 1,
+      "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+    },
+    "perFold": [
+      {
+        "fold": 0,
+        "trainRows": 6168,
+        "testRows": 2071,
+        "trainPositives": 561,
+        "testPositives": 228,
+        "testBaseRate": 0.1101,
+        "rocAuc": 0.9817,
+        "averagePrecision": 0.9122,
+        "recall": {
+          "recallAt10": 0.0439,
+          "recallAt25": 0.1096
+        }
+      },
+      {
+        "fold": 1,
+        "trainRows": 6173,
+        "testRows": 2066,
+        "trainPositives": 638,
+        "testPositives": 151,
+        "testBaseRate": 0.0731,
+        "rocAuc": 0.9803,
+        "averagePrecision": 0.8383,
+        "recall": {
+          "recallAt10": 0.0662,
+          "recallAt25": 0.1656
+        }
+      },
+      {
+        "fold": 2,
+        "trainRows": 6190,
+        "testRows": 2049,
+        "trainPositives": 566,
+        "testPositives": 223,
+        "testBaseRate": 0.1088,
+        "rocAuc": 0.991,
+        "averagePrecision": 0.9234,
+        "recall": {
+          "recallAt10": 0.0448,
+          "recallAt25": 0.1121
+        }
+      },
+      {
+        "fold": 3,
+        "trainRows": 6186,
+        "testRows": 2053,
+        "trainPositives": 602,
+        "testPositives": 187,
+        "testBaseRate": 0.0911,
+        "rocAuc": 0.9066,
+        "averagePrecision": 0.6287,
+        "recall": {
+          "recallAt10": 0.0535,
+          "recallAt25": 0.1337
+        }
+      }
+    ],
+    "foldSpread": {
+      "mean": 0.9649,
+      "stdDev": 0.0339,
+      "min": 0.9066,
+      "max": 0.991
+    },
+    "deltasVsBaseline": {
+      "precision": 0.6956,
+      "auc": 0.4603
+    },
+    "deploymentGate": {
+      "usable": true,
+      "beatsAlwaysAlert": true,
+      "rankingNotInverted": true,
+      "reasons": []
+    }
+  },
+  "modelCard": {
+    "name": "nwis_kick",
+    "riskType": "KICK",
+    "purpose": "Detect an underbalanced entry into an overpressured shale before it flows.",
+    "trainedAt": "2026-10-04T12:04:18.395Z",
+    "featureVersion": "v1.0.0",
+    "featureList": [
+      "depth_m",
+      "depth_fraction_of_td",
+      "inclination_deg",
+      "dogleg_deg_per_30m",
+      "azimuth_sin",
+      "azimuth_cos",
+      "hole_size_in",
+      "section_no",
+      "metres_into_formation",
+      "metres_to_formation_top",
+      "mud_weight_ppg",
+      "ecd_ppg",
+      "pore_pressure_gradient_ppg",
+      "fracture_gradient_ppg",
+      "overbalance_ppg",
+      "fracture_margin_ppg",
+      "is_underbalanced",
+      "is_overbalanced_ecd",
+      "mud_system_oil_based",
+      "lcm_present",
+      "lcm_ppb",
+      "d_exponent",
+      "normalised_d_exponent",
+      "d_exponent_trend",
+      "lithology_index",
+      "formation_pore_risk",
+      "torque_knm",
+      "drag_knm",
+      "torque_ratio_local",
+      "drag_ratio_local",
+      "rop_mhr",
+      "rop_ratio_local",
+      "wob_ton",
+      "hook_load_ton",
+      "spp_psi",
+      "torque_drag_ratio",
+      "hook_load_ratio_local",
+      "flow_out_lpm",
+      "flow_deficit_lpm",
+      "pit_volume_m3",
+      "pit_trend_m3_per_m",
+      "gas_ratio_ppm",
+      "gas_ratio_ratio_local",
+      "prior_event_rate",
+      "prior_loss_rate",
+      "prior_kick_rate",
+      "prior_stuck_rate",
+      "prior_severity_p90",
+      "prior_offset_wells_with_events"
+    ],
+    "featureCount": 49,
+    "trainingRows": 8239,
+    "trainingWells": 48,
+    "positives": 789,
+    "positiveRate": 9.58,
+    "validation": {
+      "method": "4-fold cross-validation grouped by well",
+      "rationale": "Rows are split by well, never at random. Adjacent metres of one hole share their own neighbourhood in the rolling features and the same rock, so a random row split leaks the well into the training set and reports a number that does not survive the next well.",
+      "folds": 4
+    },
+    "expectedFeatures": [
+      "overbalance_ppg",
+      "normalised_d_exponent",
+      "d_exponent_trend",
+      "gas_ratio_ratio_local",
+      "lithology_index"
+    ],
+    "limitations": [
+      "Labels are widened by ±75 m around each recorded event so the model sees precursors. The positive rate in training (9.58%) is therefore higher than the operational event rate, and the operating threshold is not a frequency estimate.",
+      "Training data is synthetic. The generator derives event labels from the same physical channels the feature extractor measures, so a high score here demonstrates that the pipeline is internally consistent — it is not evidence of field performance. Real well data must be used before any operational decision rests on these numbers.",
+      "One model covers the whole field. Formation-specific behaviour is expressed through the leave-one-well-out formation priors in the feature set, not through separate models."
+    ],
+    "kind": "classifier",
+    "algorithm": "logistic_regression",
+    "headline": "Held-out ROC AUC 0.9603 over 48 unseen wells; at threshold 0.9069784641120023 it catches 74.5% of logged events with 79.1% of alerts worth acting on.",
+    "selection": {
+      "criterion": "highest mean held-out ROC AUC across grouped folds, average precision as tie-break",
+      "candidates": [
+        {
+          "algorithm": "logistic_regression",
+          "rocAuc": 0.9603,
+          "rocAucConfidence": {
+            "lower": 0.9523,
+            "upper": 0.9664,
+            "resamples": 300
+          },
+          "averagePrecision": 0.8136,
+          "calibrationError": 0.0702,
+          "selected": true
+        },
+        {
+          "algorithm": "gradient_boosted_trees",
+          "rocAuc": 0.83,
+          "rocAucConfidence": {
+            "lower": 0.8198,
+            "upper": 0.8398,
+            "resamples": 300
+          },
+          "averagePrecision": 0.45,
+          "calibrationError": 0.1797,
+          "selected": false
+        }
+      ],
+      "rationale": "logistic_regression was selected because it scored higher on held-out wells than gradient_boosted_trees (0.9603 vs 0.83). The features are engineered local ratios and physics margins, which are close to linear, so a boosted model had little interaction structure to exploit here. On a feature set with genuine non-linearity the ordering could reverse; the comparison is re-run on every training run for that reason."
+    },
+    "operatingPoint": {
+      "threshold": 0.9069784641120023,
+      "thresholdSource": "chosen on pooled out-of-fold predictions with a precision floor",
+      "minPrecision": 0.3,
+      "precision": 0.7914,
+      "recall": 0.7452,
+      "f1": 0.7676,
+      "truePositives": 588,
+      "falsePositives": 155,
+      "falseNegatives": 201,
+      "trueNegatives": 7295,
+      "note": null
+    },
+    "calibration": {
+      "method": "Platt scaling fitted on the training set",
+      "slope": 2.8032,
+      "intercept": -3.5467,
+      "expectedCalibrationError": 0.0702,
+      "reliability": [
+        {
+          "range": "0.0–0.1",
+          "count": 6370,
+          "meanPredicted": 0.011,
+          "observedFrequency": 0.0119
+        },
+        {
+          "range": "0.1–0.2",
+          "count": 210,
+          "meanPredicted": 0.1445,
+          "observedFrequency": 0.0571
+        },
+        {
+          "range": "0.2–0.3",
+          "count": 131,
+          "meanPredicted": 0.2453,
+          "observedFrequency": 0.0229
+        },
+        {
+          "range": "0.3–0.4",
+          "count": 96,
+          "meanPredicted": 0.3512,
+          "observedFrequency": 0.0104
+        },
+        {
+          "range": "0.4–0.5",
+          "count": 84,
+          "meanPredicted": 0.4519,
+          "observedFrequency": 0.0119
+        },
+        {
+          "range": "0.5–0.6",
+          "count": 92,
+          "meanPredicted": 0.5505,
+          "observedFrequency": 0.0652
+        },
+        {
+          "range": "0.6–0.7",
+          "count": 140,
+          "meanPredicted": 0.6522,
+          "observedFrequency": 0.0857
+        },
+        {
+          "range": "0.7–0.8",
+          "count": 152,
+          "meanPredicted": 0.7518,
+          "observedFrequency": 0.1579
+        },
+        {
+          "range": "0.8–0.9",
+          "count": 197,
+          "meanPredicted": 0.8525,
+          "observedFrequency": 0.2944
+        },
+        {
+          "range": "0.9–1.0",
+          "count": 767,
+          "meanPredicted": 0.9486,
+          "observedFrequency": 0.7771
+        }
+      ]
+    },
+    "baselines": {
+      "description": "flag every depth interval as positive",
+      "precision": 0.0958,
+      "recall": 1,
+      "note": "the trivial comparator; a classifier is only worth deploying if its precision at equal recall beats this"
+    },
+    "topCoefficients": [
+      {
+        "feature": "lithology_index",
+        "weight": 1.9363
+      },
+      {
+        "feature": "gas_ratio_ppm",
+        "weight": 1.8193
+      },
+      {
+        "feature": "fracture_gradient_ppg",
+        "weight": -1.7457
+      },
+      {
+        "feature": "hole_size_in",
+        "weight": -1.5318
+      },
+      {
+        "feature": "prior_kick_rate",
+        "weight": 1.5123
+      },
+      {
+        "feature": "lcm_present",
+        "weight": 1.4913
+      },
+      {
+        "feature": "section_no",
+        "weight": -1.2883
+      },
+      {
+        "feature": "overbalance_ppg",
+        "weight": -1.2527
+      },
+      {
+        "feature": "prior_offset_wells_with_events",
+        "weight": -1.2269
+      },
+      {
+        "feature": "formation_pore_risk",
+        "weight": 1.2202
+      },
+      {
+        "feature": "lcm_ppb",
+        "weight": -1.1902
+      },
+      {
+        "feature": "pore_pressure_gradient_ppg",
+        "weight": 0.9366
+      },
+      {
+        "feature": "d_exponent",
+        "weight": -0.85
+      },
+      {
+        "feature": "fracture_margin_ppg",
+        "weight": -0.8467
+      },
+      {
+        "feature": "prior_loss_rate",
+        "weight": 0.726
+      }
+    ],
+    "interpretableRules": null,
+    "foldSpread": {
+      "mean": 0.9649,
+      "stdDev": 0.0339,
+      "min": 0.9066,
+      "max": 0.991
+    }
+  },
+  "artifact": {
+    "kind": "logistic",
+    "weights": [
+      0.02612043997768307,
+      -0.5902914201203211,
+      -0.24731881508734518,
+      -0.045584289830492314,
+      6.667776958821237e-11,
+      1.2798259777347938e-11,
+      -1.5317758561993648,
+      -1.288317392491108,
+      0.252360202620095,
+      -0.25545861718114377,
+      -0.3737316769845862,
+      -0.056547655398337754,
+      0.9365956539622057,
+      -1.7457058733136752,
+      -1.2526668826909189,
+      -0.846652494483221,
+      0.2446805830359854,
+      0.2063856824316487,
+      0.2697529046576492,
+      1.4913203733115654,
+      -1.1901845674150384,
+      -0.849958521642066,
+      -0.6085481491507664,
+      0.33564312798333035,
+      1.9362837696320394,
+      1.2201697703925218,
+      0.0447289228781233,
+      0.2501486601367283,
+      -0.11760259051350662,
+      0.2857652488629594,
+      -0.5168867076875937,
+      0.2149314243858272,
+      -0.03117995948822094,
+      -0.3460487258240357,
+      -0.4928739596984154,
+      0.2849002457271753,
+      0.11533988369803216,
+      0.5486205347239088,
+      0.15516916093703037,
+      0.00044348119415303113,
+      -0.11987556127385438,
+      1.8192747384525083,
+      -0.6311696553035913,
+      0.5522177014797445,
+      0.7259508382652863,
+      1.5123040873989553,
+      0.12484421849509227,
+      0.4961757288379049,
+      -1.2268850803559368
+    ],
+    "bias": -2.2440705850926603,
+    "means": [
+      3297.0554678965896,
+      0.4574017720597155,
+      9.01250515839298,
+      0.23688433062264405,
+      0,
+      1,
+      7.621161548731642,
+      4.74390095885423,
+      43.85723995630473,
+      -43.85723995630473,
+      14.054881660395644,
+      16.4593051341182,
+      13.165841849739387,
+      17.11966804223754,
+      0.8890398106566353,
+      0.660362908119919,
+      0.18497390460007282,
+      0.46935307682971233,
+      0.3454302706639155,
+      0.38584779706275035,
+      4.058247360116529,
+      1.5133218837237554,
+      1.3558855443621824,
+      0.010731512319456236,
+      0.6596941376380945,
+      0.1329370069183096,
+      31.99285957033624,
+      39.443578104138986,
+      1.0162591212525791,
+      1.0196702269692925,
+      9.722051219807698,
+      0.9957088602985802,
+      16.79447505765258,
+      191.5076708338388,
+      3981.426872193227,
+      0.8691692681150616,
+      1.0040766112392376,
+      874.0401869158876,
+      4.610960067969412,
+      142.01874377958492,
+      0.0007328947687826234,
+      153.3994416798155,
+      1.1041730792571947,
+      2.2364061172472387,
+      0.15607173200631144,
+      0.11553283165432698,
+      0.7888700084961767,
+      3.6198567787352833,
+      8.482582837723024
+    ],
+    "deviations": [
+      2102.0418975491943,
+      0.274066942863059,
+      15.829738346086241,
+      0.39849390582617017,
+      0.000001,
+      0.000001,
+      4.0061017907323695,
+      1.3843590343759289,
+      561.5564449478244,
+      561.5564449478244,
+      2.47899430879913,
+      3.6965447021710673,
+      2.0995608423919303,
+      1.9513956708826474,
+      0.7604849783041425,
+      1.9949099578387133,
+      0.3882763953900529,
+      0.4990598822788526,
+      0.47550835825774235,
+      0.48679489989576885,
+      5.577616575424279,
+      0.5539324366363241,
+      0.15968882194109638,
+      0.21546087213513912,
+      0.2722712277530876,
+      0.051590174438816486,
+      25.758273478766597,
+      36.80454164276941,
+      0.04948158807277103,
+      0.06654083718523333,
+      7.669359560564842,
+      0.16156806134881335,
+      5.196174600372935,
+      35.0790603869484,
+      3058.702292675631,
+      0.0805122280840794,
+      0.006457455254461222,
+      185.09632913727233,
+      34.284497485726,
+      1.1929961841473078,
+      0.051824930365713485,
+      147.95916943390023,
+      0.8093223560054469,
+      2.4169558076166244,
+      0.48888921263334706,
+      0.21812403892057414,
+      0.8819882886967055,
+      1.515281683800032,
+      5.692714404020448
+    ],
+    "l2": 0.001,
+    "trainingLoss": 0.22928255307449935,
+    "classWeight": 16.99619771863118,
+    "positives": 789,
+    "n": 8239,
+    "calibrator": {
+      "kind": "platt",
+      "slope": 2.8031775656490745,
+      "bias": -3.546733360866424,
+      "mean": 0.22561576764547872,
+      "deviation": 0.31971117218895057
+    },
+    "operatingThreshold": 0.9069784641120023,
+    "featureVersion": "v1.0.0"
+  }
+}

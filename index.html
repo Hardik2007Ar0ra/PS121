@@ -1,1 +1,16 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#111411"/><title>NWIS · Nearby Wells Intelligence</title></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#111411"/><title>NWIS · Nearby Wells Intelligence</title><script>
+  // Runs before React mounts so a light-theme user never sees a dark flash.
+  // Mirrors src/theme.js: stored choice wins, otherwise follow the OS.
+  (function () {
+    try {
+      var stored = localStorage.getItem('nwis_theme');
+      if (stored !== 'dark' && stored !== 'light') {
+        stored = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.dataset.theme = stored;
+    } catch (e) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+</script>
+</head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
